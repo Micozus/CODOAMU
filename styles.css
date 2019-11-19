@@ -1,0 +1,111 @@
+:root {
+  --sakura: #ac351e;
+  --white: #ffffff;
+  --dash: #333333;
+  --middle: #a8c256;
+  --wheat: #f3d9b1;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+}
+#header {
+  background-color: var(--dash);
+}
+.container {
+  display: flex;
+}
+li {
+  flex-basis: 33%;
+  align-items: center;
+  list-style-type: none;
+}
+.menu__item {
+  display: block;
+  text-decoration: none;
+  color: var(--sakura);
+  text-transform: capitalize;
+  text-align: center;
+  transition: 0.3s;
+  box-sizing: border-box;
+  padding: 20px;
+  font-weight: bold;
+}
+.banner {
+  /* do wywalenia jak będzie logo */
+  display: flex;
+  flex-direction: column;
+  background-image: url(./food.jpg);
+  background-position: center;
+  background-size: cover;
+  justify-content: center;
+  /* do wywalenia jak będzie logo */
+  height: 35vh;
+  margin: 5vh 0;
+}
+/* do wywalenia jak będzie logo */
+.banner__text {
+  color: var(--sakura);
+  font-weight: bold;
+  display: block;
+  padding: 5px 0 5px 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+/* do wywalenia jak będzie logo */
+.search__input {
+  display: block;
+  padding: 5px;
+  width: 80%;
+  margin: 10px auto;
+  border: 1px solid var(--dash);
+  background-color: var(--wheat);
+  border-radius: 3px;
+}
+.search__button {
+  margin: 10px auto;
+  display: block;
+  padding: 5px 10px;
+  color: var(--wheat);
+  background-color: var(--dash);
+  border: 1px solid var(--dash);
+  border-radius: 3px;
+}
+.recipes {
+  width: 90%;
+  background-color: var(--wheat);
+  margin: 0 auto 60px;
+}
+.recipe {
+  margin: 10px 0;
+}
+.recipe__image {
+  background-color: aqua;
+  width: 100px;
+  min-width: 100px;
+  height: 100px;
+  margin: 5px;
+}
+.recipe__description {
+  padding: 10px;
+  text-decoration: none;
+  color: var(--sakura);
+}
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+}
+.footer__text {
+  color: var(--sakura);
+  padding: 15px;
+  display: block;
+  text-align: center;
+}
+.off {
+  display: none;
+}

@@ -1,0 +1,145 @@
+// Media Breakpoints
+
+@mixin breakpoint-mobile {
+    @media (max-width: 767px) { @content };
+}
+@mixin breakpoint-tablet-por {
+    @media (min-width: 768px) and (max-width: 1279px) { @content };
+}
+@mixin breakpoint-desktop {
+    @media (min-width: 1280px) { @content };
+}
+@mixin breakpoint-laptop-small {
+  @media (min-width: 1280px) and (max-height: 720px) { @content };
+}
+@mixin breakpoint-mobile-land {
+  @media (min-width: 420px) and (max-width: 833px) and (max-height: 420px)  { @content };
+}
+
+// Transforms
+
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+
+@mixin transformOrigin($property) {
+  -webkit-transform-origin: $property;
+  -ms-transform-origin: $property;
+  transform-origin: $property;
+}
+
+
+// Dimensions
+
+@mixin box($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+// Opacity 
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity = $opacity-ie); //IE8
+}
+
+// Keyframes 
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+      @content;
+    }
+  
+    @-moz-keyframes #{$name} {
+      @content;
+    }
+  
+    @keyframes #{$name} {
+      @content;
+    }
+  }
+
+// Animation 
+
+@mixin animation($attr) {
+  animation: $attr;
+  -webkit-animation: $attr;
+}
+
+@mixin animationDelay($attr) {
+  animation-delay: $attr;
+  -webkit-animation-delay: $attr;
+}
+
+// Transitions
+
+@mixin transition($attr) {
+  transition: $attr;
+  -webkit-transition: $attr;
+}
+
+// Filters
+
+@mixin filter($attr) {
+  filter: $attr;
+  -ms-filter: $attr;
+}
+
+// Position 
+
+@mixin position($top, $left) {
+    top: $top;
+    left: $left;
+}
+
+@mixin positionb($bottom, $right) {
+    bottom: $bottom;
+    right: $right;
+}
+
+// Gradients 
+
+@mixin gradient($start-color, $end-color, $orientation) {
+    background: $start-color;
+    @if $orientation == 'vertical' {
+      background: -webkit-linear-gradient(top, $start-color, $end-color);
+      background: linear-gradient(to bottom, $start-color, $end-color);
+    } @else if $orientation == 'horizontal' {
+      background: -webkit-linear-gradient(left, $start-color, $end-color);
+      background: linear-gradient(to right, $start-color, $end-color);
+    } @else {
+      background: -webkit-radial-gradient(center, ellipse cover, $start-color, $end-color);
+      background: radial-gradient(ellipse at center, $start-color, $end-color);
+    }
+  }
+
+// Box-Shadow
+
+@mixin box-shadow-inset($top, $left, $blur, $color) {
+      -webkit-box-shadow: inset $top $left $blur $color;
+      -moz-box-shadow: inset $top $left $blur $color;
+      box-shadow: inset $top $left $blur $color;
+}
+@mixin box-shadow($top, $left, $blur, $color) {
+  -webkit-box-shadow: $top $left $blur $color;
+  -moz-box-shadow: $top $left $blur $color;
+  box-shadow: $top $left $blur $color;
+}
+@mixin box-shadow-spread($top, $left, $blur, $spread, $color) {
+  -webkit-box-shadow: $top $left $blur $spread $color;
+  -moz-box-shadow: $top $left $blur $spread $color;
+  box-shadow: $top $left $blur $spread $color;
+}
+
+// User select 
+
+@mixin no-select {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }

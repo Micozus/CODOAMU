@@ -1,0 +1,1 @@
+export default test = query => console.log(query);

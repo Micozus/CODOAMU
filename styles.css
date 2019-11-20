@@ -83,6 +83,8 @@ li {
 }
 .recipe__image {
   background-color: aqua;
+  background-position: center;
+  background-size: cover;
   width: 100px;
   min-width: 100px;
   height: 100px;

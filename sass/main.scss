@@ -1,0 +1,100 @@
+@import "./_reset.scss";
+@import "./_mixins.scss";
+body {
+  font-family: "Open Sans", sans-serif;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  color: #000000;
+}
+.wrapper {
+  max-width: 1200px;
+  position: relative;
+  margin: 0 auto;
+}
+.banner {
+  display: flex;
+  flex-direction: column;
+  background-image: url("./../logo.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  justify-content: center;
+  height: 35vh;
+  margin: 0 auto;
+  padding: 5%;
+  max-width: 950px;
+}
+.search {
+  &__input {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+  }
+  &__button {
+    margin: 10px auto;
+    display: block;
+  }
+}
+.recipes {
+  width: 90%;
+  margin: 0 auto 60px;
+}
+.recipe {
+  margin: 10px 0;
+  display: flex;
+  &__image {
+    background-color: aqua;
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    margin: 5px;
+  }
+  &__description {
+    padding: 10px;
+    text-decoration: none;
+  }
+}
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: antiquewhite;
+}
+.footer__text {
+  padding: 15px;
+  display: block;
+  text-align: center;
+}
+.off {
+  display: none;
+}
+.card {
+  margin: 10px auto;
+  &__wrapper {
+    width: 95%;
+    margin: 0 auto 100px;
+  }
+  &__image {
+    height: 30vh;
+    background-color: red;
+    margin: 10px auto;
+  }
+  &__title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  &__subtitle {
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+  &__list {
+    &-item {
+      margin-left: 20px;
+    }
+  }
+}

@@ -40,7 +40,7 @@ button.addEventListener("click", e => {
       card.classList.add("off");
     }
     createRecipe(input.value);
-    input.value = null;
+    button.innerHTML = "Let's cook again!";
   }
 });
 

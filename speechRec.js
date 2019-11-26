@@ -5,14 +5,14 @@ recognition.interimResults = true;
 recognition.lang = 'en-US';
 
 //tworzę pojedynczy pojemnik na składnik
-let ingred = document.createElement('li'); //zmienić li na odpowiedni tag ? chips ?
-ingred.setAttribute("class", "card__list-item");
+let ingred = document.createElement('li');
+ingred.setAttribute("class", "card__list-item"); //zmienić li na odpowiedni tag ? chips ?
 const ingList = document.querySelector('.card__list');
 ingList.appendChild(ingred);
 
 //pojemnik na składniki
 //todo dodawanie składników wprowadzonych tekstowo, a nie głosowo
-//todo usuwanie składników z listy -> evetListener?
+//todo usuwanie składników z listy -> eventListener?
 const ingredArray = [];
 
 
@@ -24,24 +24,31 @@ const handleStartCooking = () => {
 };
 
 const handleFinalInput = (ingredient) => {
-    //pushuje skłądnik do listy tylko gdy jest final
+    //pushuje składnik do listy tylko gdy jest final
     ingredArray.push(ingredient);
+
     ingred = document.createElement('li');
     ingred.setAttribute("class", "card__list-item");
     ingList.appendChild(ingred);
 };
 
-function handleDoneEnteringIngredients() {
-    //odpiąć nasłuch
+const removeSpeechListeners = () => {
     recognition.removeEventListener('end', recognition.start);
-    // recognition.removeEventListener('result', handleInpuResult);
     recognition.removeEventListener('result', handleInpuResult);
-
-    // recognition.abort();
-    console.log("should stop listening now");
+};
+const handleDoneEnteringIngredients = () => {
+    //todo zmienić na async, zeby najpierw text się czyścił
+    ingred.textContent = '';//usuwa let's cook z listy wyświetlanych składników
+    //odpinam nasłuch
+    removeSpeechListeners();
     //emit eventu czy przekazanie od razu do szukania przepisów?
     handleStartCooking();
-}
+};
+
+// const promise = new Promise(function (resolve, reject) {
+//     resolve(ingred.textContent = '');
+// });
+
 
 const handleInpuResult = (e) => {
     let ingredient = Array.from(e.results)
@@ -52,8 +59,7 @@ const handleInpuResult = (e) => {
 
     if (e.results[0].isFinal) {
         if (ingredient === "let's cook") {
-            //todo zmienić na async, zeby najpierw text się czyścił
-            ingred.textContent = '';//usuwa let's cook z listy wyświetlanych składników
+            // promise.then(removeSpeechListeners).then(handleStartCooking);
             handleDoneEnteringIngredients();
         } else {
             handleFinalInput(ingredient);
@@ -74,5 +80,5 @@ button.addEventListener('click', () => {
 });
 
 //obsługa zakończenia wprowadania składników,
-cookButton.addEventListener('click', handleStartCooking);
+cookButton.addEventListener('click', handleDoneEnteringIngredients);
 

@@ -4,18 +4,26 @@ const recognition = new SpeechRecognition();
 recognition.interimResults = true;
 recognition.lang = 'en-US';
 
-//tworzę pojedynczy pojemnik na składnik
+//tworzę pojedynczy pojemnik na składnik - tymczasowo listItem
 let ingred = document.createElement('li');
 ingred.setAttribute("class", "card__list-item");
 //zmienić li na odpowiedni tag ? chips ?
 // ingred = document.createElement('div');
 // ingred.setAttribute("class", "mdc-chip");
+//pojemnik na składniki
 const ingList = document.querySelector('.card__list');
 
-//pojemnik na składniki
 //todo dodawanie składników wprowadzonych tekstowo, a nie głosowo
 //todo usuwanie składników z listy -> eventListener?
-const ingredArray = ['potato'];
+const ingredArray = [];
+
+// nie click, a 'sluchamCoWyemitujeChipsPoKliknięciuX'
+ingList.addEventListener('click', (e) => {
+    if (ingredArray.includes(e.target.textContent, 0)) {
+        //todo removing from array
+    }
+});
+
 
 //kończy to wciśnięcie przycisku Let's cook;
 const handleStartCooking = () => {
@@ -55,7 +63,7 @@ const handleDoneEnteringIngredients = () => {
 };
 
 const handleInpuResult = (e) => {
-    //sprawdzam, czy mam miejsce
+    //sprawdzam, czy mam miejsce na kolejny składnik
     ingList.appendChild(ingred);
     let ingredient = Array.from(e.results)
         .map(result => result[0])
@@ -79,16 +87,21 @@ const handleInpuResult = (e) => {
 //obsługa przycisku do rozpoczęcia przyjmowania skłądników
 //dopiero do wciśnięciu, aplikacja zaczyna nasłuchiwać
 const button = document.getElementById("start_stop");
-button.addEventListener('click', () => {
+
+const startListening = () => {
     recognition.addEventListener('result', handleInpuResult);
     //ponowne uruchomienie nasłuchu po przyjęciu skłądnika
     recognition.addEventListener('end', recognition.start);
     //rozpoczęcie nasłuchu
     recognition.start();
-});
+};
 
-//obsługa zakończenia wprowadania składników,
+button.addEventListener('click', startListening);
+
+//obsługa zakończenia wprowadania składników -> id cooking time zamienić na włąściwe
+// id buttona rozpoczynającego szukania
 const cookButton = document.getElementById("cookingTime");
+
 cookButton.addEventListener('click', handleDoneEnteringIngredients);
 
 const getRecipes = (recipes) => {
@@ -101,7 +114,7 @@ const getRecipes = (recipes) => {
                 getRecipeSteps(json);
             });
     }
-}
+};
 
 const getRecipeSteps = (recipe) => {
     fetch(`https://api.spoonacular.com/recipes/${recipe.id}/analyzedInstructions?stepBreakdown=false&apiKey=649be07875ee49d9ac67a87858375775`)
@@ -170,5 +183,4 @@ const createRecipeEntry = (recipeJson, stepsJson) => {
         }
     }
     recipeList.appendChild(li);
-
-}
+};

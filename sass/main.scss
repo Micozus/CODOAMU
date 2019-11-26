@@ -1,17 +1,21 @@
 @import "./_reset.scss";
 @import "./_mixins.scss";
+
 body {
   font-family: "Open Sans", sans-serif;
 }
+
 .demo-layout-transparent .mdl-layout__header,
 .demo-layout-transparent .mdl-layout__drawer-button {
   color: #000000;
 }
+
 .wrapper {
   max-width: 1200px;
   position: relative;
   margin: 0 auto;
 }
+
 .banner {
   display: flex;
   flex-direction: column;
@@ -25,24 +29,29 @@ body {
   padding: 5%;
   max-width: 950px;
 }
+
 .search {
   &__input {
     display: block;
     width: 75%;
     margin: 10px auto;
   }
+
   &__button {
     margin: 10px auto;
     display: block;
   }
 }
+
 .recipes {
   width: 90%;
   margin: 0 auto 60px;
 }
+
 .recipe {
   margin: 10px 0;
   display: flex;
+
   &__image {
     background-color: aqua;
     background-position: center;
@@ -52,11 +61,13 @@ body {
     height: 100px;
     margin: 5px;
   }
+
   &__description {
     padding: 10px;
     text-decoration: none;
   }
 }
+
 #footer {
   position: fixed;
   bottom: 0;
@@ -64,34 +75,42 @@ body {
   right: 0;
   background-color: antiquewhite;
 }
+
 .footer__text {
   padding: 15px;
   display: block;
   text-align: center;
 }
+
 .off {
-  display: none;
+  //display: none;
 }
+
 .card {
   margin: 10px auto;
+
   &__wrapper {
     width: 95%;
     margin: 0 auto 100px;
   }
+
   &__image {
     height: 30vh;
     background-color: red;
     margin: 10px auto;
   }
+
   &__title {
     font-size: 2rem;
     font-weight: bold;
     text-transform: capitalize;
   }
+
   &__subtitle {
     text-transform: capitalize;
     font-weight: bold;
   }
+
   &__list {
     &-item {
       margin-left: 20px;

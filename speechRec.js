@@ -17,12 +17,16 @@ const ingList = document.querySelector('.card__list');
 //todo usuwanie składników z listy -> eventListener?
 const ingredArray = [];
 
-// nie click, a 'sluchamCoWyemitujeChipsPoKliknięciuX'
-ingList.addEventListener('click', (e) => {
-    if (ingredArray.includes(e.target.textContent, 0)) {
-        //todo removing from array
+//todo nie click, a 'sluchamCoWyemitujeChipsPoKliknięciuX' czy jakośtam
+//tą funkcję mogę przetestowac dopiero na koniec, narazie nie mam jak
+const removeFromList = (e) => {
+    let elementToRemove = e.target.textContent;
+    if (ingredArray.includes(elementToRemove, 0)) {
+        let indexToRemove = ingList.indexOf(elementToRemove);
+        ingList.splice(indexToRemove, 1);
     }
-});
+};
+ingList.addEventListener('click', removeFromList);
 
 
 //kończy to wciśnięcie przycisku Let's cook;
@@ -86,7 +90,7 @@ const handleInpuResult = (e) => {
 //pobieranie tekstu
 //obsługa przycisku do rozpoczęcia przyjmowania skłądników
 //dopiero do wciśnięciu, aplikacja zaczyna nasłuchiwać
-const button = document.getElementById("start_stop");
+const listenButton = document.querySelector(".listen_button");
 
 const startListening = () => {
     recognition.addEventListener('result', handleInpuResult);
@@ -96,11 +100,12 @@ const startListening = () => {
     recognition.start();
 };
 
-button.addEventListener('click', startListening);
+listenButton.addEventListener('click', startListening);
 
 //obsługa zakończenia wprowadania składników -> id cooking time zamienić na włąściwe
 // id buttona rozpoczynającego szukania
-const cookButton = document.getElementById("cookingTime");
+const cookButton = document.querySelector(".search__button");
+
 
 cookButton.addEventListener('click', handleDoneEnteringIngredients);
 

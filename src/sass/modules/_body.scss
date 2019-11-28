@@ -1,0 +1,43 @@
+$textBreadcrumb: 9pt;
+$textTiny: .6rem;
+$textSmall: .8rem;
+$textNormal: 14pt;
+$textBig: 1.4rem;
+$textH3: 1.8rem;
+$textH2: 3rem;
+$textH1: 6.5rem;
+
+$assetsImagesLocation: "../assets/img";
+
+$wrapWidth: 100vw;
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-width: 320px;
+
+
+  &.scrollOff {
+    overflow-y: hidden !important;
+  }
+
+}
+
+body {
+  background: $wall-texture-bg;
+  font-size: $textNormal;
+  //font-family: $fontMain;
+  color: $jet;
+}
+
+b, strong {
+  font-weight: 600;
+}
+
+
+%flex-center {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}

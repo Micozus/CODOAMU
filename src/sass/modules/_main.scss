@@ -1,0 +1,34 @@
+main {
+
+  #mainWrapper {
+    display: flex;
+    @include box($wrapWidth, 100vh);
+    @extend %flex-center;
+
+    #wallBg {
+      position: relative;
+      z-index: 1;
+      height: 650px;
+      width: 100vw;
+
+      div {
+        &:first-of-type {
+          height: 260px;
+          background: url("#{$assetsImagesLocation}/wall_texture_bg.png") repeat-x;
+        }
+
+        &:nth-of-type(2) {
+          height: 12px;
+          background: $wall-texture-darker;
+          border-top: #f2f6f9 solid 1px;
+          border-bottom: #e1e9ec solid 1px;
+        }
+
+        &:last-of-type {
+          height: 160px;
+          background: $wall-texture-lighter;
+        }
+      }
+    }
+  }
+}

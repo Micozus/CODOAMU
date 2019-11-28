@@ -160,6 +160,10 @@ const createRecipeEntry = (recipeJson, stepsJson) => {
     let div_c_img = document.createElement('div');
     div_c_wrap.appendChild(div_c_img);
 
+    var img = document.createElement('img');
+    img.src = recipeJson.image
+    div_c_img.appendChild(img);
+
     let section_c_ing = document.createElement('section');
     section_c_ing.textContent = 'Ingredients:';
     div_c_wrap.appendChild(section_c_ing);

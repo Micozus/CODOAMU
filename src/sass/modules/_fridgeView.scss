@@ -1,0 +1,90 @@
+main {
+  #mainWrapper {
+    #fridgeView {
+      display: flex;
+      flex-flow: row nowrap;
+      margin: 0 auto;
+      @include box(95vw, 100vh);
+      @include transition(all .4s ease);
+
+      .fridge {
+        background: url("#{$assetsImagesLocation}/fridge-open.png") no-repeat 0 50% / contain;
+        width: 40vw;
+        max-width: 500px;
+        @include transition(all .3s ease);
+
+        &.hide {
+          @include opacity(0);
+          @include transform(translateX(-100%));
+        }
+      }
+
+      .content {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 60vw;
+        @extend %flex-center;
+
+        .selectMethod {
+          @include transition(all .3s ease);
+
+          > div:first-child {
+            border-radius: 15px;
+            color: $light-sea-green;
+            padding: 15px;
+            text-align: center;
+
+            h3, h4 {
+              line-height: 1.1;
+              margin: 10px 0;
+              font-weight: 600;
+              @include no-select;
+            }
+          }
+
+          > div:nth-child(2) {
+            display: flex;
+            flex-flow: row nowrap;
+            @extend %flex-center;
+            justify-content: space-evenly;
+
+            > button {
+              border-radius: 15px;
+              padding: 15px;
+              background: $chinese-red;
+              display: flex;
+              border: 0;
+              cursor: pointer;
+              @extend %flex-center;
+              @include transition(all .3s ease);
+              @include transform(translateY(0%));
+              @include box-shadow(0px, 3px, 5px, rgba(0, 0, 0, 0.5));
+
+              &:hover, &:active, &:focus {
+                background: $chinese-red-darker;
+
+                @include transform(translateY(-5%));
+                box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+                -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+
+                i {
+                  color: $white;
+                }
+              }
+
+              i {
+                font-size: $textH1;
+                color: $wheat;
+                cursor: pointer;
+                @include no-select;
+              }
+
+
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

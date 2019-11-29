@@ -1,3 +1,6 @@
+const utilCreateElem = require("../util/helper");
+const fridgeView = require("./fridge-view");
+
 // Selectors
 
 const appStart = document.querySelector("#loaderLogo button");
@@ -9,8 +12,7 @@ const kitchenElements = document.querySelectorAll("#kitchenFurniture > div");
 
 const toKitchenView = () => {
     logoOverlay.classList.add("hide");
-    setTimeout(() => logoOverlay.remove(), 500);
-
+    setTimeout(() => logoOverlay.remove(), 300);
 };
 
 const toFridgeView = () => {
@@ -21,17 +23,10 @@ const toFridgeView = () => {
         wall.remove();
         kitchen.remove();
         ctaLocation.remove();
+        fridgeView();
     }, 1000);
+
 };
-
-// helpers
-
-const utilCreateElem = (elem, html) => {
-    const el = document.createElement(elem);
-    el.innerHTML = html;
-    return el;
-};
-
 
 // Start of an app
 
@@ -52,7 +47,7 @@ appStart.addEventListener("click", () => {
         ctaLocation.insertBefore(elem, null);
         button = document.querySelector("#ctaLocation button");
 
-    }, 1000);
+    }, 500);
     setTimeout(() => button.classList.remove("hide"), 1200);
 });
 

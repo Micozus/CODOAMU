@@ -38,7 +38,7 @@ const handleStartCooking = () => {
         .then(response => response.json())
         .then(json => {
             getRecipes(json);
-        });
+        }).catch(err => console.log(err));
 };
 
 const handleFinalInput = (ingredient) => {
@@ -117,7 +117,7 @@ const getRecipes = (recipes) => {
             .catch(new Error('Could not get recipe info'))
             .then(json => {
                 getRecipeSteps(json);
-            });
+            }).catch(err => console.log(err));
     }
 };
 
@@ -128,7 +128,7 @@ const getRecipeSteps = (recipe) => {
         .then(json => {
             console.log(json);
             createRecipeEntry(recipe, json);
-        });
+        }).catch(err => console.log(err));
 }
 
 const createRecipeEntry = (recipeJson, stepsJson) => {
@@ -160,6 +160,10 @@ const createRecipeEntry = (recipeJson, stepsJson) => {
     let div_c_img = document.createElement('div');
     div_c_wrap.appendChild(div_c_img);
 
+    var img = document.createElement('img');
+    img.src = recipeJson.image
+    div_c_img.appendChild(img);
+
     let section_c_ing = document.createElement('section');
     section_c_ing.textContent = 'Ingredients:';
     div_c_wrap.appendChild(section_c_ing);
@@ -189,3 +193,5 @@ const createRecipeEntry = (recipeJson, stepsJson) => {
     }
     recipeList.appendChild(li);
 };
+
+

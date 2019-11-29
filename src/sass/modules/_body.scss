@@ -4,10 +4,11 @@ $textSmall: .8rem;
 $textNormal: 14pt;
 $textBig: 1.4rem;
 $textH3: 1.8rem;
-$textH2: 3rem;
+$textH2: 2.5rem;
 $textH1: 6.5rem;
 
 $assetsImagesLocation: "../assets/img";
+$assetsFontsLocation: "../assets/fonts";
 
 $wrapWidth: 100vw;
 
@@ -27,12 +28,16 @@ html, body {
 body {
   background: $wall-texture-bg;
   font-size: $textNormal;
-  //font-family: $fontMain;
+  font-family: 'Fredoka One', cursive;
   color: $jet;
 }
 
 b, strong {
   font-weight: 600;
+}
+
+h3, h2, h1 {
+  font-family: 'Fredoka One', cursive;
 }
 
 

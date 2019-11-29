@@ -1,7 +1,36 @@
 main {
 
+  #loaderLogo {
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    background: rgba(255, 255, 255, .9);
+    z-index: 3;
+    @extend %flex-center;
+    @include box(100vw, 100vh);
+    @include no-select;
+    @include transition(all .4s ease);
+
+    #siteLogo {
+      background: url("#{$assetsImagesLocation}/logo.png") no-repeat 50% 50% / contain;
+      height: 150px;
+      width: 50vw;
+      max-width: 900px;
+    }
+
+    .siteHighlight {
+      span {
+        color: $chinese-red;
+      }
+    }
+
+
+  }
+
   #mainWrapper {
     display: flex;
+    position: relative;
+    overflow-x: hidden;
     @include box($wrapWidth, 100vh);
     @extend %flex-center;
 
@@ -29,6 +58,96 @@ main {
           background: $wall-texture-lighter;
         }
       }
+    }
+
+    #kitchenFurniture {
+
+      position: absolute;
+      margin: 0 auto;
+      height: 650px;
+      width: 925px;
+      z-index: 2;
+      @include transition(all .7s ease);
+
+      div {
+        position: absolute;
+        @include transition(all .7s ease);
+
+
+        &:first-of-type {
+          background: url("#{$assetsImagesLocation}/kitchen-ele-5.png") no-repeat 0 0 / contain;
+          display: block;
+          @include position(25%, 625px);
+          @include box(300px, 273px);
+        }
+
+        &:nth-of-type(2) {
+          background: url("#{$assetsImagesLocation}/kitchen-ele-1.png") no-repeat 0 100% / contain;
+          display: block;
+          @include position(25%, 290px);
+          @include box(170px, 273px);
+        }
+
+        &:nth-of-type(3) {
+          background: url("#{$assetsImagesLocation}/kitchen-ele-2.png") no-repeat 50% 0 / contain;
+          display: block;
+          @include position(-8%, 0);
+          @include box(480px, 200px);
+        }
+
+        &:nth-of-type(4) {
+          background: url("#{$assetsImagesLocation}/kitchen-ele-6.png") no-repeat 0 100% / contain;
+          display: block;
+          @include position(25%, 0px);
+          @include box(145px, 273px);
+        }
+
+        &:nth-of-type(5) {
+          background: url("#{$assetsImagesLocation}/kitchen-ele-6.png") no-repeat 0 100% / contain;
+          display: block;
+          @include position(25%, 145px);
+          @include box(145px, 273px);
+        }
+
+        &:nth-of-type(6) {
+          @include position(10%, 462px);
+          @include box(165px, 370px);
+
+          button {
+            background: url("#{$assetsImagesLocation}/fridge-1.png") no-repeat 0 100% / contain;
+            display: block;
+            cursor: pointer;
+            border: 0;
+
+            @include transition(all .3s ease);
+            @include box(100%, 100%);
+
+            &:hover {
+              @include filter(brightness(.9));
+            }
+          }
+        }
+
+        &:nth-of-type(7) {
+          background: url("#{$assetsImagesLocation}/microwave.png") no-repeat 0 100% / contain;
+          display: block;
+          @include position(172px, 20px);
+          @include box(100px, 56px);
+        }
+
+        &:last-of-type {
+          background: url("#{$assetsImagesLocation}/kitchen-ele-4.png") no-repeat 0 100% / contain;
+          display: block;
+          @include position(-20px, 70%);
+          @include box(300px, 159px);
+        }
+      }
+    }
+
+    #ctaLocation {
+      position: absolute;
+      z-index: 3;
+      top: 60%;
     }
   }
 }

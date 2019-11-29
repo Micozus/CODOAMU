@@ -1,0 +1,36 @@
+.ctaBig {
+  display: flex;
+  border-radius: 10px;
+  line-height: 1;
+  text-align: center;
+  background: $chinese-red;
+  color: $wheat;
+  font-weight: 300;
+  width: 300px;
+  cursor: pointer;
+  border: 0;
+  padding: 10px;
+  @include no-select;
+  @extend %flex-center;
+  @include transition(all .3s ease);
+  @include transform(translateY(0%));
+  @include box-shadow(0px, 3px, 5px, rgba(0, 0, 0, 0.5));
+
+  &:hover, &:active, &:focus {
+    background: $chinese-red-darker;
+    color: $white;
+    @include transform(translateY(-5%));
+    box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.grayscaled {
+  @include filter(grayscale(1) brightness(120%));
+}
+
+.hide {
+  @include transform(translateY(-5%));
+  pointer-events: none;
+  @include opacity(0);
+}

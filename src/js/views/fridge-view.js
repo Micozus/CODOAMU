@@ -60,8 +60,8 @@ const micInputView = () => {
         <div class="card__image"></div>
         <section class="card__ingredients">
             <h1>Your Ingredients:</h1>
-            <ul class="card__list">
-            </ul>
+            <div class="card__list">
+            </div>
         </section>`;
     const micSection = utilCreateElem("section", templateView);
     micSection.id = "micInputView";
@@ -76,8 +76,8 @@ const micInputView = () => {
 
     // Ingredient element to push
 
-    let ingred = document.createElement('li');
-    ingred.setAttribute("class", "card__list-item");
+    let ingred = document.createElement('div');
+    ingred.setAttribute("class", "ingredientToBeAdded");
 
     // Ingredient container selector
     const ingList = document.querySelector('.card__list');
@@ -87,7 +87,7 @@ const micInputView = () => {
     const listenButton = document.querySelector(".listen_button");
 
     const removeFromList = (e) => {
-        const elementToRemove = e.target;
+        const elementToRemove = e.target.parentElement.parentElement;
         console.log(elementToRemove);
         console.log(ingredArray);
         const elIndex = ingredArray.indexOf(e.target.textContent);
@@ -110,8 +110,9 @@ const micInputView = () => {
 
     const handleFinalInput = (ingredient) => {
         //pushuje składnik do listy tylko gdy jest final
-
-
+        const ingredientsContainer = document.querySelector(".card__ingredients");
+        ingredientsContainer.insertBefore(ingred, ingList);
+        setTimeout(() => ingred.classList.add("show"), 1000);
         ingredArray.push(ingredient);
 
         const chipTemplate = `
@@ -120,15 +121,24 @@ const micInputView = () => {
         `;
 
         const chip = utilCreateElem("span", chipTemplate, ["mdl-chip mdl-chip--deletable"]);
-        chip.addEventListener("click", () => removeFromList(e));
+        chip.lastElementChild.addEventListener("click", e => removeFromList(e));
         ingList.appendChild(chip);
+        ingred.classList.remove("show");
+        setTimeout(() => {
+            ingred.textContent = "";
+            ingred.remove();
+        }, 600);
 
     };
 
 
     const handleInpuResult = (e) => {
+        console.log("handleInput");
         //sprawdzam, czy mam miejsce na kolejny składnik
-        ingList.appendChild(ingred);
+        const ingredientsContainer = document.querySelector(".card__ingredients");
+        ingredientsContainer.insertBefore(ingred, ingList);
+        setTimeout(() => ingred.classList.add("show"), 300);
+
         let ingredient = Array.from(e.results)
             .map(result => result[0])
             .map(result => result.transcript)
@@ -154,6 +164,7 @@ const micInputView = () => {
     };
 
     const handleDoneEnteringIngredients = () => {
+        console.log("lets cook!")
         // ingList.removeChild(ingred);
         // ingred.textContent = '';//usuwa let's cook z listy wyświetlanych składników
         //odpinam nasłuch

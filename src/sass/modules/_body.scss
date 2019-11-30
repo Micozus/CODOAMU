@@ -40,6 +40,18 @@ h3, h2, h1 {
   font-family: 'Fredoka One', cursive;
 }
 
+h1 {
+  font-size: $textH1;
+}
+
+h2 {
+  font-size: $textH2;
+}
+
+h3 {
+  font-size: $textH3;
+}
+
 
 %flex-center {
   justify-content: center;

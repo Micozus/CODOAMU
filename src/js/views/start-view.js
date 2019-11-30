@@ -24,7 +24,7 @@ const toFridgeView = () => {
         kitchen.remove();
         ctaLocation.remove();
         fridgeView();
-    }, 1000);
+    }, 500);
 
 };
 
@@ -48,7 +48,7 @@ appStart.addEventListener("click", () => {
         button = document.querySelector("#ctaLocation button");
 
     }, 500);
-    setTimeout(() => button.classList.remove("hide"), 1200);
+    setTimeout(() => button.classList.remove("hide"), 800);
 });
 
 

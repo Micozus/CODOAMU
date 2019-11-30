@@ -1,7 +1,7 @@
 .ctaBig {
   display: flex;
   border-radius: 10px;
-  line-height: 1;
+  line-height: 1.2;
   text-align: center;
   background: $chinese-red;
   color: $wheat;
@@ -9,7 +9,7 @@
   width: 300px;
   cursor: pointer;
   border: 0;
-  padding: 10px;
+  padding: 15px;
   @include no-select;
   @extend %flex-center;
   @include transition(all .3s ease);

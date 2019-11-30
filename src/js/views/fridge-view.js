@@ -48,9 +48,123 @@ const showView = () => {
 
 const clearView = () => {
     selectMethodElement.classList.add("hide");
+    setTimeout(() => selectMethodElement.remove(), 500);
 };
 
 const micInputView = () => {
+    const contentNode = document.querySelector("#fridgeView .content")
+    const templateView = `
+        <button class="listen_button ctaBig">
+            <i class="material-icons">mic</i> Start listening
+        </button>
+        <div class="card__image"></div>
+        <section class="card__ingredients">
+            <h1>Your Ingredients:</h1>
+            <ul class="card__list">
+            </ul>
+        </section>`;
+    const micSection = utilCreateElem("section", templateView);
+    micSection.id = "micInputView";
+    contentNode.insertBefore(micSection, null);
+
+    // Speech rec object
+
+    SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    // Ingredient element to push
+
+    let ingred = document.createElement('li');
+    ingred.setAttribute("class", "card__list-item");
+
+    // Ingredient container selector
+    const ingList = document.querySelector('.card__list');
+
+    const ingredArray = [];
+
+    const listenButton = document.querySelector(".listen_button");
+
+    const removeFromList = (e) => {
+        const elementToRemove = e.target;
+        console.log(elementToRemove);
+        console.log(ingredArray);
+        const elIndex = ingredArray.indexOf(e.target.textContent);
+        ingredArray.splice(elIndex, 1);
+        ingList.removeChild(e.target);
+    };
+
+
+    const startListening = () => {
+        listenButton.classList.add("buttonBlock");
+        recognition.addEventListener('result', handleInpuResult);
+        //ponowne uruchomienie nasłuchu po przyjęciu skłądnika
+        recognition.addEventListener('end', recognition.start);
+        //rozpoczęcie nasłuchu
+        recognition.start();
+
+    };
+
+    listenButton.addEventListener('click', startListening);
+
+    const handleFinalInput = (ingredient) => {
+        //pushuje składnik do listy tylko gdy jest final
+
+
+        ingredArray.push(ingredient);
+
+        const chipTemplate = `
+            <span class="mdl-chip__text">${ingredient}</span>
+        <button type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
+        `;
+
+        const chip = utilCreateElem("span", chipTemplate, ["mdl-chip mdl-chip--deletable"]);
+        chip.addEventListener("click", () => removeFromList(e));
+        ingList.appendChild(chip);
+
+    };
+
+
+    const handleInpuResult = (e) => {
+        //sprawdzam, czy mam miejsce na kolejny składnik
+        ingList.appendChild(ingred);
+        let ingredient = Array.from(e.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('');
+        ingred.textContent = ingredient;
+
+        if (e.results[0].isFinal) {
+            if (ingredient === "let's cook") {
+                handleDoneEnteringIngredients();
+            } else if (ingredArray.length === 6) {
+                alert("Can't add more than 6 ingredients! Proceed to recipes " +
+                    "or replace ingredients with another");
+            } else {
+                handleFinalInput(ingredient);
+            }
+        }
+    };
+
+
+    const removeSpeechListeners = () => {
+        recognition.removeEventListener('end', recognition.start);
+        recognition.removeEventListener('result', handleInpuResult);
+    };
+
+    const handleDoneEnteringIngredients = () => {
+        // ingList.removeChild(ingred);
+        // ingred.textContent = '';//usuwa let's cook z listy wyświetlanych składników
+        //odpinam nasłuch
+        removeSpeechListeners();
+        //emit eventu czy przekazanie od razu do szukania przepisów?
+        handleStartCooking();
+    };
+
+    const pauseEnteringIngredients = () => {
+        removeSpeechListeners();
+    }
 
 };
 
@@ -58,5 +172,10 @@ const keyboardInputView = () => {
 
 };
 
+const toSwitchViewFromCurrent = () => {
+
+};
+
 
 module.exports = showView;
+

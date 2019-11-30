@@ -25,6 +25,12 @@ main {
         width: 60vw;
         @extend %flex-center;
 
+        .buttonBlock {
+          pointer-events: none;
+          @include opacity(.5);
+          @include filter(grayscale(1));
+        }
+
         .selectMethod {
           @include transition(all .3s ease);
 

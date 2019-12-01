@@ -23,6 +23,15 @@
     box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.3);
   }
+
+  @include breakpoint-mobile {
+    width: 200px;
+    padding: 10px;
+    h3 {
+      font-size: $textBig;
+      margin:0;
+    }
+  }
 }
 
 .grayscaled {

@@ -1,17 +1,47 @@
 main {
   #mainWrapper {
+
+    .mdl-chip {
+      height: 40px;
+      line-height: 40px;
+      padding: 0 20px;
+    }
+
+    .mdl-chip__text {
+      font-size: 20px;
+    }
+
     #fridgeView {
       display: flex;
       flex-flow: row nowrap;
       margin: 0 auto;
       @include box(95vw, 100vh);
       @include transition(all .4s ease);
+      @include breakpoint-tablet-por {
+        flex-flow: column nowrap;
+      }
+
+      @include breakpoint-mobile {
+        flex-flow: column nowrap;
+      }
 
       .fridge {
         background: url("#{$assetsImagesLocation}/fridge-open.png") no-repeat 0 50% / contain;
         width: 40vw;
         max-width: 500px;
         @include transition(all .3s ease);
+        @include breakpoint-tablet-por {
+          height: 30vh;
+          margin: 20px auto;
+        }
+        @include breakpoint-mobile-land {
+          display: none;
+        }
+
+        @include breakpoint-mobile {
+          min-height: 120px;
+          margin: 10px auto;
+        }
 
         &.hide {
           @include opacity(0);
@@ -19,7 +49,113 @@ main {
         }
       }
 
-      #micInputView {
+      #micInputView, #keyboardInputView {
+        @include breakpoint-mobile {
+          width: 95%;
+          margin-bottom: 40px;
+        }
+
+        .ingredientTextField {
+          margin-bottom: 15px;
+
+          .mdl-textfield {
+            width: 90%;
+            max-width: 500px;
+
+            input {
+              font-size: $textH3;
+            }
+
+            label {
+              font-size: $textBig;
+            }
+          }
+
+          @include breakpoint-mobile {
+            .mdl-textfield {
+              width: 70%;
+              max-width: 500px;
+
+              input {
+                font-size: $textBig;
+              }
+
+              label {
+                font-size: $textSmall;
+              }
+            }
+          }
+        }
+
+        @include keyframes(pulse) {
+          0% {
+            @include filter(brightness(1));
+            @include transform(scale(1));
+          }
+          50% {
+            @include filter(brightness(1.6));
+            @include transform(scale(1.6));
+          }
+          100% {
+            @include filter(brightness(1));
+            @include transform(scale(1));
+          }
+        }
+
+        .pulsing {
+          @include animation(pulse 1s ease 0s infinite);
+        }
+
+        .letsCookButton {
+          background: $light-sea-green !important;
+          color: $white !important;
+          max-width: 250px;
+          margin-top: 30px;
+          @include breakpoint-mobile {
+          }
+        }
+
+        @include transform(translateY(-15%));
+        @include opacity(0);
+        @include transition(all .3s ease);
+
+        &.show {
+          @include transform(translateY(0%));
+          @include opacity(1);
+        }
+
+        .ingredientsDesc {
+          p {
+            margin: 15px 0;
+            font-size: $textBig;
+          }
+
+          @include breakpoint-mobile {
+            p {
+              font-size: $textNormal;
+            }
+          }
+        }
+
+        @include breakpoint-mobile {
+          .card__ingredients {
+            h1 {
+              font-size: $textNormal;
+            }
+          }
+        }
+
+        .inputButtons {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: flex-start;
+
+          .stop_listen_button {
+            margin-left: 15px;
+            max-width: 50px;
+          }
+        }
+
         .ingredientToBeAdded {
           margin: 15px auto;
           border-radius: 15px;
@@ -38,12 +174,19 @@ main {
 
           &::after {
             content: "";
-            @include gradient($chinese-red, $chinese-red-darker, horizontal);
+            background: rgba(0, 0, 0, .2);
             width: 100%;
             height: 5px;
             display: block;
             position: relative;
             top: 5px;
+            @include transition(all .3s ease);
+          }
+
+          &.inputBeingAdded {
+            &::after {
+              background: $chinese-red-darker;
+            }
           }
         }
 
@@ -51,14 +194,32 @@ main {
           display: flex;
           flex-flow: row wrap;
           width: 50vw;
+          @include breakpoint-mobile {
+            width: 100%;
+          }
         }
       }
 
       .content {
         display: flex;
         flex-flow: column nowrap;
+
         width: 60vw;
         @extend %flex-center;
+        @include breakpoint-tablet-por {
+          width: 100%;
+        }
+        @include breakpoint-mobile {
+          width: 100%;
+          height: 100%;
+          justify-content: flex-start;
+        }
+
+        .ingredientsCount {
+          b {
+            color: $chinese-red;
+          }
+        }
 
         .buttonBlock {
           pointer-events: none;
@@ -67,7 +228,7 @@ main {
         }
 
         .selectMethod {
-          @include transition(all .3s ease);
+          @include transition(all .2s ease);
 
           > div:first-child {
             border-radius: 15px;
@@ -115,6 +276,9 @@ main {
 
               i {
                 font-size: $textH1;
+                @include breakpoint-mobile {
+                  font-size: $textH2;
+                }
                 color: $wheat;
                 cursor: pointer;
                 @include no-select;

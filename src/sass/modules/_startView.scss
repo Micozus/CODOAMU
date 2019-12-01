@@ -16,11 +16,21 @@ main {
       height: 150px;
       width: 50vw;
       max-width: 900px;
+      @include breakpoint-mobile {
+        width: 90vw;
+      }
     }
 
     .siteHighlight {
       span {
         color: $chinese-red;
+      }
+
+      @include breakpoint-mobile {
+        font-size: $textBig;
+        width: 90vw;
+        text-align: center;
+        margin: 0 auto;
       }
     }
 

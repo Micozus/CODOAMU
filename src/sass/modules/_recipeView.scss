@@ -1,0 +1,151 @@
+@import "loader";
+
+main {
+  #mainWrapper {
+
+    #recipeView {
+      display: flex;
+      flex-flow: row nowrap;
+      @include breakpoint-tablet-por {
+        flex-flow: column nowrap;
+      }
+      @include breakpoint-mobile {
+        flex-flow: column nowrap;
+      }
+      margin: 0 auto;
+      @include box(95vw, 100vh);
+      @include transition(all .4s ease);
+
+      &.hide {
+        @include opacity(0);
+        @include transform(translateX(-100%));
+      }
+
+      > div:first-of-type {
+        display: flex;
+        flex-flow: column nowrap;
+        @extend %flex-center;
+        @include breakpoint-mobile {
+          > div:nth-of-type(2) {
+            h2 {
+              font-size: $textNormal;
+            }
+          }
+        }
+      }
+
+      .kitchen {
+        background: url("#{$assetsImagesLocation}/dish-prepare.png") no-repeat 0 50% / contain;
+        width: 40vw;
+        height: 30vh;
+        max-height: 450px;
+        max-width: 450px;
+        align-self: center;
+        @include transition(all .3s ease);
+
+        &.hide {
+          @include opacity(0);
+          @include transform(translateX(-100%));
+        }
+
+        @include breakpoint-mobile {
+          display: none;
+        }
+      }
+
+      .card__recipe {
+        overflow-y: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        width: 60vw;
+        @include breakpoint-mobile {
+          width: 100%;
+          margin-top:20px;
+        }
+      }
+
+      .card__recipe-list {
+        > li {
+          border-radius: 15px;
+          padding: 10px;
+          background: $wall-texture-darker;
+          margin-bottom: 15px;
+
+          > div {
+            > h1 {
+              font-size: $textH2;
+              color: $chinese-red-darker;
+              @include breakpoint-mobile {
+                font-size: $textBig;
+              }
+
+              &:before {
+                content: url("#{$assetsImagesLocation}/chef.png");
+                display: inline-block;
+                margin-right: 10px;
+                @include box(25px, 25px);
+              }
+            }
+
+            img {
+              max-width: 300px;
+              border-radius: 15px;
+              margin: 10px auto;
+            }
+
+            > section {
+              padding: 10px;
+              border-radius: 15px;
+              background: $wall-texture-lighter;
+              margin: 10px auto;
+
+              h2 {
+                margin: 5px 0 !important;
+                @include breakpoint-mobile {
+                  font-size: $textNormal;
+                }
+              }
+
+              .ingredientsList {
+                list-style-image: url('#{$assetsImagesLocation}/harvest.png');
+                list-style-position: inside;
+              }
+
+              .stepList {
+                list-style-image: url('#{$assetsImagesLocation}/check-mark.png');
+                list-style-position: inside;
+              }
+            }
+          }
+        }
+      }
+
+      .loading {
+        align-self: center;
+        display: flex;
+        width: 100%;
+        @include breakpoint-mobile {
+          position: absolute;
+          pointer-events: none;
+          background: rgba(255, 255, 255, .4);
+          z-index: 5;
+          height: 100%;
+        }
+        @extend %flex-center;
+        @include transition(all .3s ease);
+
+        .lds-roller {
+          @include transform(scale(3));
+        }
+
+        &.hide {
+          @include transform(translateY(-15%));
+          @include opacity(0);
+        }
+
+
+      }
+    }
+
+  }
+}

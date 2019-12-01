@@ -1,20 +1,78 @@
+const utilCreateElem = require("../util/helper");
 
+const apiKey = "a1a5bdfa7e2640be98b35a595487d3da";
+const mainWrapper = document.getElementById("mainWrapper");
 
-const handleStartCooking = () => {
-    // alert(`finding recipes including: ${ingredArray.toString()}`);
+const showView = () => {
+    const templateView = `
+        <div>
+            <div class="kitchen"></div>
+            <div><h2>Let's see what you can cook :)</h2></div>
+            <div><button class="backToFridge ctaBig">Back to ingredients screen</button></div>
+        </div>
+        </div>
+        <div class="loading">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+        <section class="card__recipe">
+            
+            <ol class="card__recipe-list">
+
+            </ol>
+        </section>
+            `;
+
+    mainWrapper.firstElementChild.remove();
+    const recipeSection = utilCreateElem("section", templateView);
+    recipeSection.id = "recipeView";
+    recipeSection.classList.add("hide");
+    mainWrapper.insertBefore(recipeSection, null);
+    const backButton = document.querySelector(".backToFridge");
+    backButton.addEventListener("click", () => backToFridgeView())
+};
+
+const backToFridgeView = () => {
+    const loader = document.querySelector(".loading");
+    const recipeView = document.getElementById("recipeView");
+    recipeView.classList.add("hide");
+    setTimeout(() => {
+        recipeView.remove();
+    }, 500);
+    setTimeout(() => {
+        const backToFridge = require("./fridge-view");
+        backToFridge();
+    }, 700);
+
+};
+
+const handleStartCooking = (ingredArray) => {
+    showView();
+    const kitchen = document.querySelector('#recipeView');
+    const loader = document.querySelector(".loading");
+    setTimeout(() => kitchen.classList.remove('hide'), 500);
+
     ingr = ingredArray.toString().replace(new RegExp(' ', 'g'), ',');
     fetch(`https://api.spoonacular.com/recipes/findByIngredients?number=5&ranking=1&ignorePantry=
-    false&ingredients=${ingr}&apiKey=649be07875ee49d9ac67a87858375775`)
+    false&ingredients=${ingr}&apiKey=${apiKey}`)
         .then(response => response.json())
         .then(json => {
-            getRecipes(json);
+            setTimeout(() => {
+                loader.classList.add('hide');
+            }, 1000);
+
+            setTimeout(() => {
+                loader.remove();
+            }, 2000);
+            setTimeout(() => {
+                getRecipes(json);
+            }, 2200);
         }).catch(err => console.log(err));
 };
 
 const getRecipes = (recipes) => {
     console.log(recipes);
     for (r of recipes) {
-        fetch(`https://api.spoonacular.com/recipes/${r.id}/information?includeNutrition=false&apiKey=649be07875ee49d9ac67a87858375775`)
+        fetch(`https://api.spoonacular.com/recipes/${r.id}/information?includeNutrition=false&apiKey=${apiKey}`)
             .then(response => response.json())
             .catch(new Error('Could not get recipe info'))
             .then(json => {
@@ -24,33 +82,17 @@ const getRecipes = (recipes) => {
 };
 
 const getRecipeSteps = (recipe) => {
-    fetch(`https://api.spoonacular.com/recipes/${recipe.id}/analyzedInstructions?stepBreakdown=false&apiKey=649be07875ee49d9ac67a87858375775`)
+    fetch(`https://api.spoonacular.com/recipes/${recipe.id}/analyzedInstructions?stepBreakdown=false&apiKey=${apiKey}`)
         .then(response => response.json())
         .catch(new Error('Could not get steps info'))
         .then(json => {
             console.log(json);
             createRecipeEntry(recipe, json);
         }).catch(err => console.log(err));
-}
+};
 
 const createRecipeEntry = (recipeJson, stepsJson) => {
     const recipeList = document.querySelector('.card__recipe-list');
-    //<li class="card__recipe-list-item">
-    //  <div class="card__wrapper">
-    //   <h1 class="card__title">placeholder</h1>
-    //   <div class="card__image"></div>
-    //   <section class="card__ingredients">ingredients:
-    //       <ul class="card__list">
-    //              <li class="card__list-item">placeholder</li>
-    //       </ul>
-    //   </section>
-    //   <section class="card__recipe">
-    //       <ol class="card__recipe-list">
-    //              <li class="card__recipe-list-item">placeholder</li>
-    //          </ol>
-    //      </section>
-    //  </div>
-    //</li>
     let li = document.createElement("li");
     let div_c_wrap = document.createElement("div");
     li.appendChild(div_c_wrap);
@@ -63,14 +105,15 @@ const createRecipeEntry = (recipeJson, stepsJson) => {
     div_c_wrap.appendChild(div_c_img);
 
     var img = document.createElement('img');
-    img.src = recipeJson.image
+    img.src = recipeJson.image;
     div_c_img.appendChild(img);
 
     let section_c_ing = document.createElement('section');
-    section_c_ing.textContent = 'Ingredients:';
+    section_c_ing.innerHTML = `<h2>Ingredients:</h2>`;
     div_c_wrap.appendChild(section_c_ing);
 
     let ul_c_list = document.createElement('ul');
+    ul_c_list.setAttribute("class", "ingredientsList");
     section_c_ing.appendChild(ul_c_list);
 
     for (let ing of recipeJson.extendedIngredients) {
@@ -80,10 +123,11 @@ const createRecipeEntry = (recipeJson, stepsJson) => {
     }
 
     let section_c_step = document.createElement('section');
-    section_c_step.textContent = 'Steps:';
+    section_c_step.innerHTML = `<h2>Steps:</h2>`;
     div_c_wrap.appendChild(section_c_step);
 
     let ul_c_step_list = document.createElement('ul');
+    ul_c_step_list.setAttribute("class", "stepList");
     section_c_step.appendChild(ul_c_step_list);
 
     for (let section of stepsJson) {
@@ -95,3 +139,5 @@ const createRecipeEntry = (recipeJson, stepsJson) => {
     }
     recipeList.appendChild(li);
 };
+
+module.exports = handleStartCooking;

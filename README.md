@@ -1,4 +1,4 @@
-![Welcome screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/welcomescreen.png) ![Fridge screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/fridgescreen.png) ![Welcome screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/ingredients.png)
+![Welcome screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/welcomescreen.png) ![Fridge screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/fridgescreen.png) ![Ingredients screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/ingredients.png) ![Results screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/resultpng.png)
 
 ## CODOAMU - find recipes for what you have in your fridge :)
 ######  Weekly task in [https://coderscamp.edu.pl/](https://coderscamp.edu.pl/) course

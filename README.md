@@ -1,14 +1,15 @@
-![Welcome screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/welcomescreen.png) 
-![Fridge screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/fridgescreen.png) 
-![Ingredients screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/ingredients.png) 
-![Results screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/resultpng.png)
-
 ## CODOAMU - find recipes for what you have in your fridge :)
 ######  Weekly task in [https://coderscamp.edu.pl/](https://coderscamp.edu.pl/) course
 
 ### **LIVE DEMO:** [click here](https://micozus.github.io/CODOAMU/)
 
 App was designed to get a list of ingredients in user possesion and present a valid recipe list so he/she can make a dish from what he/she has :) App uses free api: (https://spoonacular.com/food-api), and some customly edited stock graphics from (https://www.freepik.com/).
+
+### Screenshots:
+![Welcome screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/welcomescreen.png) 
+![Fridge screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/fridgescreen.png) 
+![Ingredients screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/ingredients.png) 
+![Results screen snapshot](https://github.com/Micozus/CODOAMU/blob/master/resultpng.png)
 
 Made in collaboration with [SixtyTo](https://github.com/sixtyto/), [ewefie](https://github.com/ewefie/) and [lfiedoro](https://github.com/lfiedoro)  as a part of weekly assignment in CodersCamp JS course. 
 
